@@ -17,7 +17,6 @@ import java.util.List;
 public class PTT_Beauty_Crawler {
     private HttpManager Manager = HttpManager.getInstance();
     private int MaxPage = ConfigUtil.getIntResourceByKey("max.page");
-    private int Interval = ConfigUtil.getIntResourceByKey("crawler.interval");
     private String FilePathRoot = ConfigUtil.getStringResourceByKey("file.root");
 
     public static void main(String[] args) {
@@ -28,24 +27,15 @@ public class PTT_Beauty_Crawler {
     public void start() {
         log.info("PTT_Beauty_Crawler Start");
         Manager.setCookie("over18", "1", "www.ptt.cc");
-//        WebList Page = Crawler(Constant.START_URL);
-//        if (MaxPage > 0) {
-//            for (int i = 1; i <= MaxPage; ++i) {
-//                Page = Crawler(Page.getPerv());
-//            }
-//        } else {
-//            do {
-//                Page = Crawler(Page.getPerv());
-//            } while (Page.getPerv() != null);
-//        }
-        String Url = "https://www.ptt.cc/bbs/Beauty/M.1649492512.A.D60.html";
-        Article ArticleData = new Article();
-        WebPage ArticlePage = Manager.getBody(Url);
-        ArticleData.setImgUrlList(ArticleParser.ArticleHandler(ArticlePage));
-        List<String> ImgUrlList = ArticleData.getImgUrlList();
-        log.info("Img total: {}",ImgUrlList.size());
-        for (int i = 0; i < ImgUrlList.size(); ++i) {
-            System.out.println(ImgUrlList.get(i));
+        WebList Page = Crawler(Constant.START_URL);
+        if (MaxPage > 0) {
+            for (int i = 1; i <= MaxPage; ++i) {
+                Page = Crawler(Page.getPerv());
+            }
+        } else {
+            do {
+                Page = Crawler(Page.getPerv());
+            } while (Page.getPerv() != null);
         }
     }
 

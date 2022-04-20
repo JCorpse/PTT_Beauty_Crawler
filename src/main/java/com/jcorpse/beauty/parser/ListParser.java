@@ -43,7 +43,7 @@ public class ListParser {
                 Element TitleElement = ArticleElement.selectFirst("div.title > a");
                 ArticleData.setTitle(TitleElement.text());
                 ArticleData.setUrl(Constant.Domain + TitleElement.attr("href"));
-                ArticleData.setCategory(TitleElement.text().substring(0, TitleElement.text().indexOf(" ")).replaceAll("[\\]\\[]", "").trim());
+                ArticleData.setCategory(TitleElement.text().substring(0, TitleElement.text().indexOf("]")).replaceAll("[\\]\\[]", "").trim());
                 Element MetaElement = ArticleElement.selectFirst("div.meta");
                 ArticleData.setAuthor(MetaElement.selectFirst("div.author").text());
                 ArticleList.add(ArticleData);
