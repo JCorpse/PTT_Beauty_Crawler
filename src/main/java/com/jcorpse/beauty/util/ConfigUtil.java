@@ -7,11 +7,7 @@ import java.util.ResourceBundle;
 
 @Slf4j
 public class ConfigUtil {
-    private static ResourceBundle serverResource;
-
-    static {
-        serverResource = ResourceBundle.getBundle("config");
-    }
+    private static final ResourceBundle serverResource = ResourceBundle.getBundle("config");
 
     public static String getStringResourceByKey(String key) {
         try {

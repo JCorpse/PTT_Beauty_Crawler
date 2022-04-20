@@ -142,10 +142,14 @@ public class HttpManager {
                 } catch (Exception e) {
                     log.error("Download error: {}", e.getMessage());
                 } finally {
-                    try{
-                        bis.close();
-                        bos.close();
-                    }catch (IOException e){
+                    try {
+                        if ((bis != null)) {
+                            bis.close();
+                        }
+                        if ((bos != null)) {
+                            bos.close();
+                        }
+                    } catch (IOException e) {
                         log.error("Download Stream Close error: {}", e.getMessage());
                     }
                 }
